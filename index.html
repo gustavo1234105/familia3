@@ -1,0 +1,260 @@
+html = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma mensagem especial 💙</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background: linear-gradient(-45deg, #001b72, #0057ff, #008cff, #00cfff);
+    background-size: 400% 400%;
+    animation: fundo 12s ease infinite;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+body::before {
+    width: 350px;
+    height: 350px;
+    top: -150px;
+    left: -100px;
+}
+
+body::after {
+    width: 300px;
+    height: 300px;
+    right: -100px;
+    bottom: -120px;
+}
+
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.card {
+    width: min(720px, 94vw);
+    padding: 55px 40px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 32px;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.3),
+        inset 0 1px 0 rgba(255,255,255,.25);
+    animation: aparecer .8s ease;
+}
+
+.icone {
+    width: 95px;
+    height: 95px;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 45px;
+    background: rgba(255,255,255,.16);
+    box-shadow: 0 10px 35px rgba(0,0,0,.2);
+    animation: pulsar 2s infinite;
+}
+
+h1 {
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+    text-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+
+.subtitulo {
+    font-size: 20px;
+    opacity: .9;
+    margin-bottom: 35px;
+}
+
+button {
+    border: none;
+    padding: 16px 40px;
+    border-radius: 15px;
+    background: white;
+    color: #075cff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 18px 40px rgba(0,0,0,.32);
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+#segundaPagina {
+    display: none;
+}
+
+.coracoes {
+    font-size: 55px;
+    margin-bottom: 20px;
+    letter-spacing: 8px;
+    animation: pulsar 1.8s infinite;
+}
+
+.mensagem {
+    font-size: 21px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    opacity: .95;
+}
+
+.assinatura {
+    margin-top: 25px;
+    opacity: .7;
+    font-size: 16px;
+}
+
+@keyframes fundo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes pulsar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 40px 22px;
+    }
+
+    .icone {
+        width: 75px;
+        height: 75px;
+        font-size: 35px;
+    }
+
+    .subtitulo {
+        font-size: 17px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .coracoes {
+        font-size: 40px;
+        letter-spacing: 3px;
+    }
+
+    .mensagem {
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section id="primeiraPagina" class="pagina">
+    <div class="card">
+        <div class="icone">💙</div>
+
+        <h1>Clique neste botão</h1>
+
+        <p class="subtitulo">
+            Tenho uma mensagem especial para vocês...
+        </p>
+
+        <button onclick="abrirMensagem()">
+            ✨ Começar ✨
+        </button>
+    </div>
+</section>
+
+<section id="segundaPagina" class="pagina">
+    <div class="card">
+        <div class="coracoes">💙 ❤️ 💙</div>
+
+        <h1>Amo vocês, família! ❤️</h1>
+
+        <p class="mensagem">
+            Vocês são muito importantes para mim.<br>
+            Obrigado por todo amor, carinho e por
+            estarem sempre ao meu lado! 🥰
+        </p>
+
+        <button onclick="voltar()">
+            ← Voltar
+        </button>
+
+        <p class="assinatura">
+            Feito com carinho 💙
+        </p>
+    </div>
+</section>
+
+<script>
+function abrirMensagem() {
+    document.getElementById("primeiraPagina").style.display = "none";
+    document.getElementById("segundaPagina").style.display = "flex";
+}
+
+function voltar() {
+    document.getElementById("segundaPagina").style.display = "none";
+    document.getElementById("primeiraPagina").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
+"""
+
+path = "/mnt/data/index.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(path)
